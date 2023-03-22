@@ -1,14 +1,23 @@
-package com.alvonellos.uptime.dto;
+package com.alvonellos.uptime.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
+@Entity
+@Table(name = "hosts")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class HostDTO {
+public class Host {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "Host name is required")
     @Size(min = 2, max = 50, message = "Host name must be between 2 and 50 characters")
@@ -25,6 +34,4 @@ public class HostDTO {
     @Min(value = 0, message = "Port must be a positive integer")
     @Max(value = 65535, message = "Port number cannot be greater than 65535")
     private Integer port;
-
-    // Getters and setters
 }

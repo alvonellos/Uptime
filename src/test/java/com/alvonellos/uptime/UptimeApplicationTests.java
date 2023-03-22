@@ -8,6 +8,7 @@ class UptimeApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

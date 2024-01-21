@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uptime #The name of the Kubernetes Deployment to be created in the Kubernetes cluster
+  labels:
+    app: uptime
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: uptime
+  template:
+    metadata:
+      labels:
+        app: uptime
+    spec:
+      containers:
+        - name: uptime #The name of the container
+          image: alvonellos/uptime:$BUILD_NUMBER #The Docker image for building the React.js application container
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080  #The port for the spring application   container

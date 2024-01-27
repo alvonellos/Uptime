@@ -1,7 +1,6 @@
 package com.alvonellos.uptime.service;
 
 import com.alvonellos.uptime.dto.HostDTO;
-import com.alvonellos.uptime.exceptions.UptimeIdNotFoundException;
 import com.alvonellos.uptime.model.Host;
 import com.alvonellos.uptime.repo.HostRepository;
 import lombok.AllArgsConstructor;
@@ -9,9 +8,10 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +21,14 @@ import java.util.UUID;
 public class HostService {
     private final HostRepository hostRepository;
 
+    public long count() {
+        return hostRepository.count();
+    }
+
+    public Page<Host> getAll(Pageable pageable) {
+        return hostRepository
+              .findAll(pageable);
+    }
     public Host get(UUID id) {
         return hostRepository
                 .getReferenceById(id);

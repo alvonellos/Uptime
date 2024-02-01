@@ -25,13 +25,14 @@ public class HostService {
         return hostRepository.count();
     }
 
-    public Page<Host> getAll(Pageable pageable) {
+    public Page<HostDTO> getAll(Pageable pageable) {
         return hostRepository
-              .findAll(pageable);
+              .findAll(pageable)
+                .map(HostDTO::new);
     }
-    public Host get(UUID id) {
-        return hostRepository
-                .getReferenceById(id);
+    public HostDTO get(UUID id) {
+        return new HostDTO(hostRepository
+                .getReferenceById(id));
     }
 
     public UUID post(String name, String ip, String mac, Integer port) {
@@ -44,21 +45,20 @@ public class HostService {
         return host.getId();
     }
 
-    public Host update(UUID id, String name, String ip, String mac, Integer port) {
-        Host host = get(id);
+    public HostDTO update(UUID id, String name, String ip, String mac, Integer port) {
+        Host host = hostRepository.findById(id).orElseThrow();
         host.setName(name);
         host.setIpAddress(ip);
         host.setMacAddress(mac);
         host.setPort(port);
-        return host;
+        return host.toDTO();
     }
 
     public void delete(UUID id) {
-        Host host = get(id);
-        hostRepository.delete(host);
+        hostRepository.deleteById(id);
     }
 
-    public List<Host> search(HostDTO example) {
+    public List<HostDTO> search(HostDTO example) {
         return hostRepository
                 .findAll(new Example<Host>() {
                     @Override
@@ -70,6 +70,6 @@ public class HostService {
                     public ExampleMatcher getMatcher() {
                         return null;
                     }
-                });
+                }).stream().map(HostDTO::new).toList();
     }
 }

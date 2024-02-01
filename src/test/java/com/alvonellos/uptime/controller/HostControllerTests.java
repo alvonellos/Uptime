@@ -4,11 +4,13 @@ import com.alvonellos.uptime.dto.HostDTO;
 import com.alvonellos.uptime.service.HostService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -17,7 +19,9 @@ import java.util.UUID;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.doReturn;
 
-@ExtendWith(MockitoExtension.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@AutoConfigureMockMvc
+@WebMvcTest
 public class HostControllerTests {
 
     private final List<HostDTO> hosts = List.of(
@@ -40,7 +44,7 @@ public class HostControllerTests {
     @Autowired
     MockMvc mockMvc;
 
-    @Mock
+    @MockBean
     HostService hostService;
 
     @InjectMocks

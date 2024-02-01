@@ -43,7 +43,7 @@ public class HostDTO {
     @Max(value = 65535, message = "Port number cannot be greater than 65535")
     private Integer port;
 
-    public HostDTO(Host host) {
+    public HostDTO(@NotNull Host host) {
         this.id = host.getId();
         this.macAddress = host.getMacAddress();
         this.port = host.getPort();

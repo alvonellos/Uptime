@@ -62,4 +62,8 @@ public class Host {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+    public HostDTO  toDTO() {
+        return new HostDTO(this);
+    }
 }

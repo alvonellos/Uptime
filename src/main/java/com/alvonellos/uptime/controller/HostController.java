@@ -34,13 +34,13 @@ public class HostController {
         if (page <= 0) return badRequest().body(null);
 
         PageRequest pageRequest = PageRequest.of(page, size);
-        return ok(new PageImpl<HostDTO>(hostService.getAll(pageRequest).stream().map(HostDTO::new).toList()));
+        return ok(new PageImpl<HostDTO>(hostService.getAll(pageRequest).stream().toList()));
 
 
     }
     @GetMapping
     public ResponseEntity<HostDTO> get(@RequestParam(name = "id") UUID id) {
-        return ok(new HostDTO(hostService.get(id)));
+        return ok(hostService.get(id));
     }
 
     @PostMapping
@@ -61,6 +61,6 @@ public class HostController {
             @RequestParam(name = "mac") String mac,
             @RequestParam(name = "port") Integer port
     ) {
-        return ok(new HostDTO(hostService.update(id, name, ip, mac, port)));
+        return ok(hostService.update(id, name, ip, mac, port));
     }
 }

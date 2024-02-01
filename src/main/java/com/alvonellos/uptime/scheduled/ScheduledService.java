@@ -1,5 +1,6 @@
 package com.alvonellos.uptime.scheduled;
 
+import com.alvonellos.uptime.dto.HostDTO;
 import com.alvonellos.uptime.model.Host;
 import com.alvonellos.uptime.service.HostService;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +18,11 @@ import java.util.stream.IntStream;
 @RequiredArgsConstructor
 public class ScheduledService {
     private final HostService hostService;
-    @Scheduled(fixedRate = 10)
+    @Scheduled(fixedRate = 10000)
     public void checkHosts() throws SocketException {
         final int pages = (int) (hostService.count() / 101);
         IntStream.rangeClosed(0, pages).forEach(page -> {
-            final Page<Host> hosts = hostService.getAll(PageRequest.of(page, 101));
+            final Page<HostDTO> hosts = hostService.getAll(PageRequest.of(page, 101));
 
         });
 

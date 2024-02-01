@@ -20,11 +20,11 @@ public class ScheduledService {
     private final HostService hostService;
     @Scheduled(fixedRate = 10000)
     public void checkHosts() throws SocketException {
-        final int pages = (int) (hostService.count() / 101);
-        IntStream.rangeClosed(0, pages).forEach(page -> {
-            final Page<HostDTO> hosts = hostService.getAll(PageRequest.of(page, 101));
+       // final int pages = (int) (hostService.count() / 101);
+       // IntStream.rangeClosed(0, pages).forEach(page -> {
+        //    final Page<HostDTO> hosts = hostService.getAll(PageRequest.of(page, 101));
 
-        });
+       // });
 
     }
 }

@@ -1,6 +1,7 @@
 package com.alvonellos.uptime.repo;
 
 import com.alvonellos.uptime.model.Host;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,6 @@ import java.util.UUID;
 @Repository
 public interface HostRepository extends JpaRepository<Host, UUID> {
 
-    Page<Host> findAll(Pageable pageable);
+    @NotNull Page<Host> findAll(Pageable pageable);
     Optional<Host> findById(UUID id);
 }

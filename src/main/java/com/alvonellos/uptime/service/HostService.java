@@ -6,13 +6,10 @@ import com.alvonellos.uptime.repo.HostRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -32,7 +29,7 @@ public class HostService {
     }
     public HostDTO get(UUID id) {
         return new HostDTO(hostRepository
-                .getReferenceById(id));
+                .findById(id).orElseThrow());
     }
 
     public UUID post(String name, String ip, String mac, Integer port) {
@@ -42,6 +39,7 @@ public class HostService {
         host.setIpAddress(ip);
         host.setMacAddress(mac);
         host.setPort(port);
+        hostRepository.save(host);
         return host.getId();
     }
 
@@ -51,25 +49,11 @@ public class HostService {
         host.setIpAddress(ip);
         host.setMacAddress(mac);
         host.setPort(port);
+        hostRepository.save(host);
         return host.toDTO();
     }
 
     public void delete(UUID id) {
         hostRepository.deleteById(id);
-    }
-
-    public List<HostDTO> search(HostDTO example) {
-        return hostRepository
-                .findAll(new Example<Host>() {
-                    @Override
-                    public Host getProbe() {
-                        return new Host(example);
-                    }
-
-                    @Override
-                    public ExampleMatcher getMatcher() {
-                        return null;
-                    }
-                }).stream().map(HostDTO::new).toList();
     }
 }

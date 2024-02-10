@@ -3,12 +3,17 @@ package com.alvonellos.uptime.dto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
 class HostDTOTests {
 
     private static final HostDTO hostDTO =
@@ -28,13 +33,13 @@ class HostDTOTests {
             );
 
     @Test
-    void testHostDTOValidationSuccess() {
+    public void testHostDTOValidationSuccess() {
         Set<ConstraintViolation<HostDTO>> violations = Validation.buildDefaultValidatorFactory().getValidator().validate(hostDTO);
         assertTrue(violations.isEmpty());
     }
 
     @Test
-    void testHostDTOValidationFailure() {
+    public void testHostDTOValidationFailure() {
 
         Set<ConstraintViolation<HostDTO>> violations = Validation.buildDefaultValidatorFactory().getValidator().validate(invalidDTO);
 

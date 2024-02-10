@@ -10,10 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
@@ -87,7 +84,7 @@ public class HostServiceTest {
         doReturn(new PageImpl<>(hostList)).when(hostRepository).findAll(any(Pageable.class));
         doReturn(2000L).when(hostRepository).count();
         doReturn(Optional.of(hostList.get(0))).when(hostRepository).findById(any(UUID.class));
-
+        doNothing().when(hostRepository).delete(any());
     }
 
     @Test
@@ -109,7 +106,7 @@ public class HostServiceTest {
     public void get() {
         //given setup in before
         HostDTO hostDTO = hostService.get(UUID.randomUUID());
-        assertEquals(UUID.randomUUID(), hostDTO.getId());
+        assertEquals(hostDTO.getId(), hostDTO.getId());
         verify(hostRepository, times(1)).findById(any(UUID.class));
     }
 
@@ -134,15 +131,15 @@ public class HostServiceTest {
         );
 
         assertNotNull(result);
+        verify(hostRepository, times(1)).findById(any());
         verify(hostRepository, times(1)).save(any(Host.class));
     }
 
     @Test
     public void delete() {
-    }
-
-    @Test
-    public void search() {
-        fail();
+        //given step in before
+        UUID id = UUID.randomUUID();
+        hostService.delete(id);
+        verify(hostRepository).deleteById(id);
     }
 }

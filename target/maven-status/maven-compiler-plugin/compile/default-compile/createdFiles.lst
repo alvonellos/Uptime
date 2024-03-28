@@ -1,0 +1,13 @@
+com/alvonellos/uptime/dto/HostDTO.class
+com/alvonellos/uptime/exceptions/UptimeIdNotFoundException.class
+com/alvonellos/uptime/UptimeApplication.class
+com/alvonellos/uptime/controller/HostController.class
+com/alvonellos/uptime/scheduled/ScheduledService.class
+com/alvonellos/uptime/repo/HostRepository.class
+com/alvonellos/uptime/exceptions/UptimeAPIError.class
+com/alvonellos/uptime/exceptions/UptimeControllerAdvice.class
+com/alvonellos/uptime/service/HostService.class
+com/alvonellos/uptime/exceptions/UptimeIllegalArgumentException.class
+com/alvonellos/uptime/model/Host.class
+com/alvonellos/uptime/config/OpenApiConfig.class
+com/alvonellos/uptime/exceptions/UptimeAPIException.class

@@ -1,0 +1,13 @@
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/exceptions/UptimeIllegalArgumentException.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/exceptions/UptimeAPIException.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/model/Host.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/service/HostService.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/exceptions/UptimeControllerAdvice.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/repo/HostRepository.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/scheduled/ScheduledService.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/config/OpenApiConfig.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/exceptions/UptimeIdNotFoundException.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/controller/HostController.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/exceptions/UptimeAPIError.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/UptimeApplication.java
+/Users/alexalvonellos/GitHub/stackoverflow/Uptime/src/main/java/com/alvonellos/uptime/dto/HostDTO.java

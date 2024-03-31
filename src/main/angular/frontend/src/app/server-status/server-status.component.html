@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="card text-bg-success">
+            <div class="card-body p-2">
+                <div class="card-title mb-0 d-flex">
+                    <mat-icon>check_circle</mat-icon>
+                    <div class="h6 mb-0 ms-2" style="margin-top: 3px;">
+                        Uptime
+                    </div>
+                    <div class="ms-auto">
+                        40.4 d
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="card text-bg-success">
+            <div class="card-body p-2">
+                <div class="card-title mb-0 d-flex">
+                    <mat-icon>check_circle</mat-icon>
+                    <div class="h6 mb-0 ms-2" style="margin-top: 3px;">
+                        CPU
+                    </div>
+                    <div class="ms-auto">
+                        0.800 %
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="card text-bg-danger">
+            <div class="card-body p-2">
+                <div class="card-title mb-0 d-flex">
+                    <mat-icon>cancel</mat-icon>
+                    <div class="h6 mb-0 ms-2" style="margin-top: 3px;">
+                        Available Memory
+                    </div>
+                    <div class="ms-auto">
+                        10 %
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="card text-bg-success">
+            <div class="card-body p-2">
+                <div class="card-title mb-0 d-flex">
+                    <mat-icon>check_circle</mat-icon>
+                    <div class="h6 mb-0 ms-2" style="margin-top: 3px;">
+                        Network
+                    </div>
+                    <div class="ms-auto" [innerHTML]="'< 0.001 %'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

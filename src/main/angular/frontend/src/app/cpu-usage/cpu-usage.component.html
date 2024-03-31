@@ -1,0 +1,23 @@
+<div class="position-relative pt-3">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="position-absolute chart-menu" aria-label="Menu button">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <mat-icon>filter_alt</mat-icon>
+            <span>Option 1</span>
+        </button>
+        <button mat-menu-item disabled>
+            <mat-icon>filter_alt</mat-icon>
+            <span>Option 2</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>filter_alt</mat-icon>
+            <span>Option 3</span>
+        </button>
+    </mat-menu>
+    <div style="height: 260px;">
+        <canvas baseChart [data]="barChartData" [height]="'250px'" [options]="barChartOptions"
+            [type]="barChartType"></canvas>
+    </div>
+</div>

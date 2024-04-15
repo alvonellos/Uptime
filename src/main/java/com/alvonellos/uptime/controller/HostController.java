@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +29,9 @@ import static org.springframework.http.ResponseEntity.ok;
 public class HostController {
     private final HostService hostService;
 
-
     @GetMapping("hosts")
     public ResponseEntity<Page<HostDTO>> getAll() {
-        return new ResponseEntity<>(hostService.getAll(PageRequest.of(0, (int) hostService.count())), HttpStatus.OK);
+        return new ResponseEntity<>(hostService.getAll(PageRequest.of(0, Integer.MAX_VALUE)), HttpStatus.OK);
     }
 
     @GetMapping("host")

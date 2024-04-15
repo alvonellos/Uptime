@@ -25,12 +25,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@AutoConfigureMockMvc
-@WebMvcTest
+    @RunWith(SpringJUnit4ClassRunner.class)
+    @AutoConfigureMockMvc
+    @WebMvcTest
 public class HostControllerTests {
 
     private final List<HostDTO> hosts = List.of(
@@ -69,21 +70,21 @@ public class HostControllerTests {
         assertNotNull(mockMvc);
 
         doReturn(2L).when(hostService).count();
-        doReturn(new PageImpl<>(hosts)).when(hostService).getAll(PageRequest.of(0, 1));
+        doReturn(new PageImpl<>(hosts)).when(hostService).getAll(PageRequest.of(0, Integer.MAX_VALUE));
         doReturn(new PageImpl<>(List.of(hosts.get(0)))).when(hostService).getAll(PageRequest.of(0, 1));
         doReturn(new PageImpl<>(List.of(hosts.get(1)))).when(hostService).getAll(PageRequest.of(1, 1));
         doReturn(hosts.get(0)).when(hostService).get(hosts.get(0).getId());
         doReturn(hosts.get(1)).when(hostService).get(hosts.get(1).getId());
     }
 
-//    @Test
-//    public void getAll() throws Exception { //TODO: FIX
-//        mockMvc.perform(get("/api/hosts"))
-//             .andExpect(status().isOk())
-//             .andExpect(content().string(objectMapper.writeValueAsString(
-//                     new PageImpl<>(hosts)
-//             )));
-//    }
+    @Test
+    public void getAll() throws Exception { //TODO: FIX
+        mockMvc.perform(get("/api/hosts"))
+             .andExpect(status().isOk())
+             .andExpect(content().string(objectMapper.writeValueAsString(
+                     new PageImpl<>(hosts)
+             )));
+    }
 
     @Test
     public void getOne() throws Exception {
@@ -92,22 +93,29 @@ public class HostControllerTests {
            .andExpect(content().string(objectMapper.writeValueAsString(hosts.get(0))));
     }
 
-//    @Test
-//    public void getTwoPages() throws Exception { //TODO: FIX
-//        val page1 = mockMvc.perform(get("/api/hosts?page=0&size=1"));
-//        val page2 = mockMvc.perform(get("/api/hosts?page=1&size=1"));
-//
-//        page1.andExpect(status().isOk());
-//        page2.andExpect(status().isOk());
-//        page1.andExpect(content().string(objectMapper.writeValueAsString(
-//                new PageImpl<>(List.of(hosts.get(0)))
-//        )));
-//
-//        page2.andExpect(content().string(objectMapper.writeValueAsString(
-//                new PageImpl<>(List.of(hosts.get(1))))
-//        ));
-//
-//    }
+    @Test
+    public void getTwoPages() throws Exception { //TODO: FIX
+        val page1 = mockMvc.perform(get("/api/hosts?page=0&size=1"));
+        val page2 = mockMvc.perform(get("/api/hosts?page=1&size=1"));
+
+        page1.andExpect(status().isOk());
+        page2.andExpect(status().isOk());
+
+        page1.andDo(print());
+        page2.andDo(print());
+
+        val result1 = page1.andReturn();
+        val result2 = page2.andReturn();
+
+        val pageresp1 = objectMapper.readValue(result1.getResponse().getContentAsString(), PageImpl.class);
+        val pageresp2 = objectMapper.readValue(result2.getResponse().getContentAsString(), PageImpl.class);
+
+        assertNotNull(pageresp1);
+        assertNotNull(pageresp2);
+
+
+
+    }
 
     @Test
     public void postTest() throws Exception {
